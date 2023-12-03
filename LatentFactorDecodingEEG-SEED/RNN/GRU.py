@@ -12,7 +12,7 @@ import os
 trialL=400
 trialNum=30
 latdim=15
-step=400 #控制序列长度
+step=400 
 method='ica'
 emodim=0 
 batch=15
@@ -34,13 +34,12 @@ pred_test_acc=[]
 pred_train_acc=[]
 
 for testSubNo in range(1,16):
-    X_train = []  # list类型
+    X_train = []  
 
 
 
     print('test subNo: '+str(testSubNo))
 
-    # 构造X_train序列集
     for trainSubNo in range(1,16):
         file2 = mat73.loadmat('D:\\Processed SEED\\ICA\\encoded_eegs_' + method + '\\encoded_eegs_'+ method + '_sub' + str(
                 trainSubNo) + '_latentdim' + str(latdim) + '.mat')
@@ -49,9 +48,7 @@ for testSubNo in range(1,16):
         trainSubData = ZscoreNormalization(trainSubData)
         for trialNo in range(0, 30):
              trial_data = trainSubData[trialNo * trialL :(trialNo + 1) * trialL, :]
-             # 以step等间隔采样
              trial_data = trial_data[0:trialL:step, :]
-             # 将序列插入list，list中每个元素即一个序列
              X_train.append(trial_data)
 
     print(len(X_train))
