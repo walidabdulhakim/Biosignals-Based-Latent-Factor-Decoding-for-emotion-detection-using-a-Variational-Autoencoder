@@ -54,7 +54,6 @@ for testSubNo in range(1,16):
     print(len(X_train))
     
      
-    #构造RNN模型
     seqL = trial_data.shape[0]
     print('seqence length: '+str(seqL))
     
