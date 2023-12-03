@@ -13,7 +13,7 @@ from keras.optimizers import SGD
 trialL=400
 trialNum=30
 latdim=16
-step=400 #控制序列长度
+step=400 
 method='rbm'
 batch=15
 epoch_num=5
@@ -35,11 +35,10 @@ pred_test_acc=[]
 pred_train_acc=[]
 
 for testSubNo in range(1,16):
-    X_train = []  # list类型
+    X_train = []  
 
     print('test subNo: '+str(testSubNo))
 
-    # 构造X_train序列集
     for trainSubNo in range(1,16):
         file2 = mat73.loadmat('D:\\Processed SEED\\' + method + '\\encoded_eegs_' + method + '\\encoded_eegs_1'+ method + '_sub' + str(
                 trainSubNo) + '_latentdim' + str(latdim) + '.mat')
@@ -48,16 +47,13 @@ for testSubNo in range(1,16):
         trainSubData = ZscoreNormalization(trainSubData)
         for trialNo in range(0, 30):
              trial_data = trainSubData[trialNo * trialL :(trialNo + 1) * trialL, :]
-             # 以step等间隔采样
              trial_data = trial_data[0:trialL:step, :]
-             # 将序列插入list，list中每个元素即一个序列
              X_train.append(trial_data)
 
     print(len(X_train))
     
      
     
-    #构造RNN模型
     seqL = trial_data.shape[0]
     print('seqence length: '+str(seqL))
     model = Sequential()
